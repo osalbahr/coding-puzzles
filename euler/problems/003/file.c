@@ -9,9 +9,10 @@ static bool isFactor( long j, long k )
     return j % k == 0;
 }
 
+// No need to check if even; already taken care of
 static bool isPrime( long n )
 {
-    for ( long i = 2; i < sqrt( n ); i++ ) {
+    for ( long i = 3; i < sqrt( n ); i += 2 ) {
         if ( isFactor( n, i ) ) {
             return false;
         }
