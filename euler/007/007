@@ -1,0 +1,33 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <stdbool.h>
+
+// No need to check if even; already taken care of
+static bool isPrime( long n )
+{
+    for ( long i = 3; i < sqrt( n ); i += 2 ) {
+        if ( isFactor( n, i ) ) {
+            return false;
+        }
+    }
+
+    return true;
+} 
+
+int main()
+{
+    int n = 1;
+    int targetN = 13;
+    int currentPrime = 2;
+    for ( int i = 3; n < target; i += 2 ) {
+        if ( isPrime( i ) ) {
+            n++;
+            currentPrime = i;
+        }
+    }
+
+    printf( "The %d'th prime is %d", n, currentPrime );
+
+    return EXIT_SUCCESS;
+}
