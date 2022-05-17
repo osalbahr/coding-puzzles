@@ -12,7 +12,7 @@ static bool isFactor( long j, long k )
 // No need to check if even; already taken care of
 static bool isPrime( long n )
 {
-    for ( long i = 3; i < sqrt( n ); i += 2 ) {
+    for ( long i = 3; i <= sqrt( n ); i += 2 ) {
         if ( isFactor( n, i ) ) {
             return false;
         }
