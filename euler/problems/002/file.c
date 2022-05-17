@@ -19,7 +19,7 @@ int main()
     // 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
     int total = 0;
 
-    for ( int i = 1, current = fibb( i ); current <= 89; current = fibb( i++ ) ) {
+    for ( int i = 1, current = fibb( i ); current <= 4000000; current = fibb( i++ ) ) {
         if ( current % 2 == 0 ) {
             total += current;
         }
