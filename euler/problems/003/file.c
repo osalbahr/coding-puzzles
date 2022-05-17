@@ -24,8 +24,9 @@ int main()
 {
     long target = 600851475143;
     long largest = -1;
+    long limit = sqrt( target );
 
-    for ( long i = 2; i < sqrt( target ); i += 2 ) {
+    for ( long i = 3; i < limit; i += 2 ) {
         if ( isFactor( target, i ) &&  isPrime( i ) ) {
             largest = i;
         }
