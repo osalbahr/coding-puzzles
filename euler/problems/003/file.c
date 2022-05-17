@@ -29,10 +29,12 @@ int main()
     for ( long i = 3; i < limit; i += 2 ) {
         if ( isFactor( target, i ) &&  isPrime( i ) ) {
             largest = i;
+            target /= i;
+            limit = sqrt( target );
         }
     }
 
-    printf( "Largest prime factor: %ld\n", largest );
+    printf( "Largest prime factor: %ld\n", target );
 
     return EXIT_SUCCESS;
 }
