@@ -29,7 +29,7 @@ int main()
         for ( int j = i; j < 1000; j ++ ) {
             int product = i * j;
             sprintf( str, "%d", product );
-            if ( isPalindrome( str ) ) {
+            if ( product > largest && isPalindrome( str ) ) {
                 largest = product;
             }
         }
