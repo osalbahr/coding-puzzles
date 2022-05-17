@@ -1,3 +1,3 @@
 # euler
 
-Doing Project Euler in C
+Doing [Project Euler](https://en.wikipedia.org/wiki/Project_Euler) in C
