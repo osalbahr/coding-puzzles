@@ -30,6 +30,8 @@ int main()
             int product = i * j;
             sprintf( str, "%d", product );
             if ( product > largest && isPalindrome( str ) ) {
+            // if ( isPalindrome( str ) && product > largest ) {
+
                 largest = product;
             }
         }
