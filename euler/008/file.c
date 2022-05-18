@@ -16,10 +16,11 @@ static long getProduct( char *line, int count )
 
 static long largestProduct( char *line, int count )
 {
-    long largest = getProduct( line++, count );
+    char *pos = line;
+    long largest = getProduct( pos++, count );
 
-    while( line[ count - 1 ] ) {
-        long current = getProduct( ++line, count );
+    while( pos[ count - 1 ] ) {
+        long current = getProduct( ++pos, count );
 
         if ( current > largest ) {
             largest = current;
@@ -32,13 +33,20 @@ static long largestProduct( char *line, int count )
 int main()
 {
     FILE *input = fopen( "input.txt", "r" );
-    int count = 4;
+    int count = 13;
 
-    char line[ 1000 + 1 ];
+    char line[ LENGTH + 1 ];
     int ch;
     for ( int i = 0; ( ch = fgetc( input ) ) != EOF; i++ ) {
+        if ( ch == '\n' ) {
+            i--;
+            continue;
+        }
+
         line[ i ] = ch;
     }
+    line[ LENGTH ] = '\0';
+    printf( "%s\n", line );
 
     long largest = largestProduct( line, count );
 
