@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define LINE_LENGTH 50
-#define LINES 20
+#define LENGTH 1000
 
 static long getProduct( char *line, int count )
 {
@@ -33,16 +32,15 @@ static long largestProduct( char *line, int count )
 int main()
 {
     FILE *input = fopen( "input.txt", "r" );
-    int count = 13;
+    int count = 4;
 
-    long largest = 0;
-    char line[ LINE_LENGTH + 1 ];
-    while ( fscanf( input, "%s", line ) == 1 ) {
-        long current = largestProduct( line, count );
-        if ( current > largest ) {
-            largest = current;
-        }
+    char line[ 1000 + 1 ];
+    int ch;
+    for ( int i = 0; ( ch = fgetc( input ) ) != EOF; i++ ) {
+        line[ i ] = ch;
     }
+
+    long largest = largestProduct( line, count );
 
     printf( "Largest product of %d\nadjacesnt numbers: %ld\n", count, largest );
 
