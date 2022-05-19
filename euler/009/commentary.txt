@@ -1,0 +1,32 @@
+I'm proud to say I did this in one take. Not even compiler errors.
+
+I knew beforehand that k is largest, from how I calculated it, so I cut down the time it takes to find the largest.
+
+$ time ./file
+200 * 375 * 425 = 31875000
+real    0m0.064s
+user    0m0.057s
+sys     0m0.002s
+
+[code=c]
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <stdbool.h>
+
+int main()
+{
+    for ( int i = 1; i < 998; i++ ) {
+        for ( int j = i; j < 998; j++ ) {
+            int k = 1000 - i - j;
+
+            if ( pow( i, 2 ) + pow( j, 2 ) == pow( k, 2 ) ) {
+                printf( "%d * %d * %d = %d", i, j, k, i * j * k );
+            }
+        }
+    }
+
+    return EXIT_SUCCESS;
+}
+
+[/code]
