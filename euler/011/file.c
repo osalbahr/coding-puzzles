@@ -74,7 +74,7 @@ static int getLargestDiagonal2( int grid[][ 20 ] )
         for ( int j = 20 - 1; j >= 4 - 1; j-- ) {
             int current = 1;
             for ( int k = 0; k < 4; k++ ) {
-                current *= grid[ i - k ][ j - k ];
+                current *= grid[ i + k ][ j - k ];
             }
             waveLargest = max( waveLargest, current );
         }
