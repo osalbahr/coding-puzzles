@@ -8,12 +8,10 @@ static int hasDivisors( int divisors )
   int current = 0;
   for ( int i = 1;; i++ ) {
     current += i;
-    int temp = current; 
     int count = 0;
-    for ( int j = 1; temp != 1; j++ ) {
-      if ( temp % j == 0 ) {
-        temp /= j;
-        count += 2;
+    for ( int j = 1; j <= current; j++ ) {
+      if ( current % j == 0 ) {
+        count += 1;
       }
 
       if ( count >= divisors ) {
