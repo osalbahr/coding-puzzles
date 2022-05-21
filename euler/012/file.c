@@ -26,7 +26,9 @@ static int hasDivisors( int divisors )
 // Solely in vim, this time
 int main()
 {
-  printf( "Least number with %d divisors is %d\n", 5, hasDivisors( 5 ) );  
+  for ( int i = 2; i <= 10; i++ ) {
+    printf( "Least number with %d divisors is %d\n", i, hasDivisors( i ) );  
+  }
 
   return EXIT_SUCCESS;
 }
