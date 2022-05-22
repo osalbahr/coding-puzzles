@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <math.h>
 
-// This time, in vim
 int main()
 {
   long result = 0;
