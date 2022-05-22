@@ -62,7 +62,7 @@ static int hasDivisors( int divisors )
 }
 
 
-// Solely in vim, this time
+// Solely in vim, this time. Actually, ended up using vs code
 int main( int argc, char *argv[] )
 {
   for ( int i = 1; i <= atoi(argv[ 1 ]); i++ ) {
