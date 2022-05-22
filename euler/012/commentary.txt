@@ -1,0 +1,52 @@
+Has some bugs but still gave the correct answer. I was surprised that only doing the += 2 trick was enough to arrive at the correct answer in a reasonable amount of time.
+
+$ (time ./file > commentary.txt) 2>> commentary.txt; cat file.c >> commentary.txt
+
+Least number with 501 divisors is 76576500
+
+real	0m0.182s
+user	0m0.176s
+sys	0m0.003s
+[code=c]
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+
+// Works for 2 and higher
+static int hasDivisors( int divisors )
+{
+  int current = 0;
+  for ( int i = 1;; i++ ) {
+    current += i;
+
+    // Detect overflow
+    if ( current < 0 ) {
+      printf( "%d%d\n", current, i );
+      exit( 1 );
+    }
+
+    int count = 0;
+    int cap = sqrt( current );
+    for ( int j = 1; j <= cap; j++ ) {
+      if ( current % j == 0 ) {
+        count += 2;
+        if ( j == cap ) {
+          count--;
+        }
+      }
+
+      if ( count >= divisors ) {
+        return current;
+      }
+    }
+  }    
+}
+
+int main( int argc, char *argv[] )
+{
+  int targest = 501;
+  printf( "Least number with %d divisors is %d\n", targest, hasDivisors( targest ) );
+
+  return EXIT_SUCCESS;
+}
+[/code]
