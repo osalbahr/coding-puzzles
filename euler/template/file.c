@@ -4,8 +4,8 @@
 
 int main()
 {
-    char str[] = "Hello World!";
-    printf( "%s\n", str );
+  char str[] = "Hello World!";
+  printf( "%s\n", str );
 
-    return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }
