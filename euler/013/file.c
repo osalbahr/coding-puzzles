@@ -5,8 +5,17 @@
 // This time, in vim
 int main()
 {
-    char str[] = "Hello World!";
-    printf( "%s\n", str );
+  long result = 0;
+  char current[ 50 + 1 ];
+  
+  while( scanf( "%s", current ) == 1 ) {
+    long temp;
+    sscanf( current + 40, "%ld", &temp );
+    result += temp;
+    result %= 10000000000;
+  }
 
-    return EXIT_SUCCESS;
+  printf( "Ans: %ld\n", result ); 
+
+  return EXIT_SUCCESS;
 }
