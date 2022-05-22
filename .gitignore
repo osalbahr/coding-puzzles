@@ -1,6 +1,6 @@
 # Typical temporary output file, for testing.
-*/output.txt
 */*/output.txt
+*/*/stderr.txt
 
 # AFS-generated directories that sometimes cause problems.
 */.__afs*
