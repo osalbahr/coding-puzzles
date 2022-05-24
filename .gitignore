@@ -45,3 +45,6 @@ test-files
 
 # Class files
 *.class
+
+## VS Code
+.vscode
