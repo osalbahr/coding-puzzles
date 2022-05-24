@@ -1,3 +1,13 @@
+Tbh, I'm surprised brute-force worked, not needing the boolean array. But I will try it later^(TM).
+
+$ (time ./file > commentary.txt) 2>> commentary.txt; cat file.c >> commentary.txt
+
+837799:524
+
+real	0m3.176s
+user	0m2.779s
+sys	0m0.016s
+[code=c]
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -58,3 +68,4 @@ int main()
 
   return EXIT_SUCCESS;
 }
+[/code]
