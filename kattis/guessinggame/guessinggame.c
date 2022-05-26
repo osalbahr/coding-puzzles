@@ -50,6 +50,8 @@ int main()
         break;
       default: // case 'o'
         checkValid( current, low, high );
+        high = 10;
+        low = 1;
     }
   }
 }
