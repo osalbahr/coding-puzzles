@@ -1,13 +1,27 @@
 #include <stdio.h>
 
-int getMin( int n )
+int getMinXor( n )
 {
-  for ( int i = 1;; i++ ) {
-    if ( ( n & i ) > 0 && ( n ^ i ) > 0 ) {
-      // printf( "%d:%d\n", n, i );
-      // printf( "%d:%d\n", ( n & i ) > 0 , ( n | i ) > 0 );
+  for ( int i = 1;; i <<= 1 ) {
+    if ( ( n ^ i ) > 0 ) {
       return i;
     }
+  }
+}
+
+int getMin( int n )
+{
+  int result = 0;
+  for ( int i = 1;; i <<= 1 ) {
+    if ( ( n & i ) > 0 && ( n ^ i ) > 0 ) {
+      result += i;
+    }
+  }
+
+  if ( ( n ^ result ) > 0 ) {
+    return result;
+  } else {
+    return result + getMinXor( n );
   }
 }
 
