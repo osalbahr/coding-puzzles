@@ -5,6 +5,8 @@
 
 #define report(x) cout << x << endl;
 
+#define endl "\n"
+
 using namespace std;
 
 int cmp( const void *a, const void *b ) {
