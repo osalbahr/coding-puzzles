@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define report(x) cout << x << endl;
+
 using namespace std;
 
 int cmp( const void *a, const void *b ) {
@@ -14,12 +16,9 @@ bool solve()
   int n;
   cin >> n;
 
-  if ( n == 1 ) {
-    return false;
-  }
-
   int listA[ 1000 ];
   int listB[ 1000 ];
+  bool taken[ 1000 ] = {};
   int listC[ 1000 ];
 
   for ( int i = 0; i < n; i++ ) {
@@ -29,6 +28,10 @@ bool solve()
     listB[ i ] = current;
   }
 
+  if ( n == 1 ) {
+    return false;
+  }
+  
   if ( n == 2 ) {
     cout << listA[ 1 ] << " " << listA[ 0 ];
     return true;
@@ -36,22 +39,22 @@ bool solve()
 
   qsort( listB, n, sizeof( int ), cmp );
 
-  int idx = 0;
   for ( int i = 0; i < n - 1; i++ ) {
     int j;
-    for ( j = 0; listB[ j ] < 0 || listA[ idx ] == listB[ j ]; j++ ) {
-      if ( j == n ) return false;
-    }
+    for ( j = 0; taken[ j ] || listA[ i ] == listB[ j ]; j++ );
 
-    listC[ idx++ ] = listB[ j ];
-    listB[ j ] = -1;
+    listC[ i ] = listB[ j ];
+    taken[ j ] = true;
   }
 
-  if ( listA[ n - 1 ] == listB[ n - 1 ] ) {
+  int i;
+  for ( i = 0; taken[ i ]; i++ );
+  listC[ n - 1 ] = listB[ i ];
+  taken[ i ] = true;
+
+  if ( listC[ n - 1 ] == listA[ n - 1 ] ) {
     listC[ n - 1 ] = listC[ n - 2 ];
     listC[ n - 2 ] = listB[ n - 1 ];
-  } else {
-    listC[ n - 1 ] = listB[ n - 1 ];
   }
 
   for ( int i = 0; i < n; i++ ) {
