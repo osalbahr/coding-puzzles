@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <algorithm>
 
 #include <stdlib.h>
@@ -14,13 +15,15 @@ for ( int i = 0; i < n; i++ ) { \
   cout << list[ i ] << " "; \
 } \
 cout << endl;
-#define double long double
+// #define double long double
 
 void solve( double *angles )
 {
   int r, n;
   double d, m, s;
   cin >> r >> n >> d >> m >> s;
+
+  cout << n << endl;
 
   double theta = d + m / 60 + s / 3600;
 
@@ -45,7 +48,7 @@ void solve( double *angles )
   double specialDelta = 360 - ( angles[ n - 1 ] - angles[ 0 ] );
   biggestDelta = max( biggestDelta, specialDelta );
   
-  cout << M_PI * r * r * biggestDelta / 360 << endl;
+  cout << setprecision( 9 ) << M_PI * r * r * biggestDelta / 360 << endl;
 }
 
 int main()
