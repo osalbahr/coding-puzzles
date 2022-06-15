@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+#include <set>
 
 #include <stdlib.h>
 #include <stdbool.h>
@@ -17,7 +18,7 @@ for ( int i = 0; i < n; i++ ) { \
 cout << endl;
 // #define double long double
 
-void solve( double *angles )
+void solve()
 {
   int r, n;
   double d, m, s;
@@ -27,25 +28,26 @@ void solve( double *angles )
 
   double theta = d + m / 60 + s / 3600;
 
+  set<int> angles;
   double current = 0;
   for ( int i = 0; i < n; i++ ) {
     current += theta;
     current -= current >= 360 ? 360 : 0;
-    angles[ i ] = current;
+    angles.insert( current );
   }
 
-  sort( angles, angles + n );
-
   double biggestDelta = -1;
+  set<int>::iterator it = angles.begin();
+  double prev = *(it++);
   for ( int i = 0; i < n - 1; i++ ) {
-    double currentDelta = angles[ i + 1 ] - angles[ i ];
-
-    if ( currentDelta == 0 ) continue;
+    double next = *(it++);
+    double currentDelta = next - prev;
+    prev = next;
 
     biggestDelta = max( biggestDelta, currentDelta );
   }
   
-  double specialDelta = 360 - ( angles[ n - 1 ] - angles[ 0 ] );
+  double specialDelta = 360 - ( *( --angles.end() ) - *angles.begin() );
   biggestDelta = max( biggestDelta, specialDelta );
   
   cout << setprecision( 9 ) << M_PI * r * r * biggestDelta / 360 << endl;
@@ -56,10 +58,8 @@ int main()
   int m;
   cin >> m;
 
-  double *angles = (double *)malloc( N_MAX * sizeof( double ) );
-    
   while ( m-- ) {
     
-    solve( angles );
+    solve();
   }
 }
