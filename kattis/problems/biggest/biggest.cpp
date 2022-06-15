@@ -28,7 +28,7 @@ void solve()
 
   double theta = d + m / 60 + s / 3600;
 
-  set<int> angles;
+  set<double> angles;
   double current = 0;
   for ( int i = 0; i < n; i++ ) {
     current += theta;
@@ -37,7 +37,7 @@ void solve()
   }
 
   double biggestDelta = -1;
-  set<int>::iterator it = angles.begin();
+  set<double>::iterator it = angles.begin();
   double prev = *(it++);
   for ( int i = 0; i < angles.size() - 1; i++ ) {
     double next = *(it++);
