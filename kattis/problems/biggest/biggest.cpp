@@ -24,8 +24,6 @@ void solve()
   double d, m, s;
   cin >> r >> n >> d >> m >> s;
 
-  cout << n << endl;
-
   double theta = d + m / 60 + s / 3600;
 
   set<double> angles;
@@ -33,6 +31,11 @@ void solve()
   for ( int i = 0; i < n; i++ ) {
     current += theta;
     current -= current >= 360 ? 360 : 0;
+
+    if ( angles.find( current ) != angles.end() ) {
+      break;
+    }
+
     angles.insert( current );
   }
 
