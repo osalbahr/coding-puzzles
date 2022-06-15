@@ -39,7 +39,7 @@ void solve()
   double biggestDelta = -1;
   set<int>::iterator it = angles.begin();
   double prev = *(it++);
-  for ( int i = 0; i < n - 1; i++ ) {
+  for ( int i = 0; i < angles.size() - 1; i++ ) {
     double next = *(it++);
     double currentDelta = next - prev;
     prev = next;
