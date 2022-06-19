@@ -4,7 +4,7 @@
 cp -r template $1
 
 # Rename hello.c
-mv $1/hello.c $1/$1.c
+mv $1/hello.cpp $1/$1.cpp
 
 # Edit the Makefile accordingly
 str="s/hello/$1/g"
