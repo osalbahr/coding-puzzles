@@ -30,7 +30,7 @@ bool solve( int k )
         continue;
       }
 
-      for ( int idx; idx < k; idx++ ) {
+      for ( int idx = 0; idx < k; idx++ ) {
         if ( current == courses[ idx ] ) {
           r--;
           break;
