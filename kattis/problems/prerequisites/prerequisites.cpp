@@ -1,11 +1,11 @@
 #include <iostream>
-#include <vector>
+#include <set>
 
 using namespace std;
 
 bool solve( int k )
 {
-  vector<int> courses( k );
+  set<int> courses;
   int m;
   cin >> m;
 
@@ -13,7 +13,7 @@ bool solve( int k )
   for ( int i = 0; i < k; i++ ) {
     int course;
     cin >> course;
-    courses[ i ] = course;
+    courses.insert( course );
     // cout << course << endl;
   }
 
@@ -30,11 +30,8 @@ bool solve( int k )
         continue;
       }
 
-      for ( int idx = 0; idx < k; idx++ ) {
-        if ( current == courses[ idx ] ) {
-          r--;
-          break;
-        }
+      if ( courses.count( current ) != 0 ) {
+        r--;
       }
     }
 
