@@ -64,6 +64,15 @@ int solve()
     }
   }
 
+  if ( startColor == currentColor ) {
+    if ( currentColor == 'R' ) {
+      result -= r[ ir + 1 ];
+    } else {
+      result -= b[ ib + 1 ];
+    }
+    knots--;
+  }
+
   return result - knots;
 }
 
