@@ -1,0 +1,17 @@
+birds.cpp:37:31: error: invalid operands to binary expression ('std::set<long long>::iterator' (aka '__tree_const_iterator<long long, std::__tree_node<long long, void *> *, long>') and 'int')
+  long long last = *( s.end() - 1 );
+                      ~~~~~~~ ^ ~
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/wrap_iter.h:266:1: note: candidate template ignored: could not match '__wrap_iter' against '__tree_const_iterator'
+operator-(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter2>& __y) _NOEXCEPT
+^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/move_iterator.h:163:1: note: candidate template ignored: could not match 'move_iterator' against '__tree_const_iterator'
+operator-(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
+^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/reverse_iterator.h:212:1: note: candidate template ignored: could not match 'reverse_iterator' against '__tree_const_iterator'
+operator-(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
+^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:579:11: note: candidate template ignored: could not match 'fpos' against '__tree_const_iterator'
+streamoff operator-(const fpos<_StateT>& __x, const fpos<_StateT>& __y)
+          ^
+1 error generated.
+make: *** [birds.o] Error 1
