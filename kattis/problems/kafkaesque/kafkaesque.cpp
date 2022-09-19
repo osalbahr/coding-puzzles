@@ -22,20 +22,12 @@ int main()
   while ( c < k ) {
     int i = min_element( v.begin(),v.end() ) - v.begin();
     REPORT( i );
-    v[ i ] = 1000;
+    v[ i ] = 1000; // Dummy "clear cell" value, since k <= 100
     c++;
 
-    int j = min_element( v.begin(),v.end() ) - v.begin();
-    while ( j > i ) {
-      v[ j ] = 1000;
-      c++;
-      if ( c == k ) {
-        break;
-      }
-      i = j;
-      j = min_element( v.begin(),v.end() ) - v.begin();
-    }
-
+    // If the next minimum is in front of you, got get the signature
+    int j;
+    for (; ( j = min_element( v.begin(),v.end() ) - v.begin() ) > i; v[ j ] = 1000, c++, i = j );
     result++;
   }
 
