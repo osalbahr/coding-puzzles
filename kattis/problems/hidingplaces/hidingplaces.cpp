@@ -2,8 +2,7 @@
 #include <set>
 #include <vector>
 #include <queue>
-
-#include <cstdio>
+#include <algorithm>
 
 using namespace std;
 
@@ -26,7 +25,7 @@ void solve()
   cin >> s;
   // letter = row
   // number = col
-  int pos = ( s[ 0 ] - 'a' ) * 8 + ( s[ 1 ] - '1' );
+  int pos = ( s[ 0 ] - 'a' ) * 10 + ( s[ 1 ] - '1' );
   vector<int> moves;
 
   // Fill the moves vector
@@ -40,7 +39,7 @@ void solve()
   for ( int i = 0; i < moves.size(); i++ )
     cout << moves[ i ] << endl;
 
-  vector<int> grid( 64, -1 );
+  vector<int> grid( 80, -1 );
   grid[ pos ] = 0;
 
   queue<int> hops;
@@ -49,7 +48,7 @@ void solve()
   int found = 1;
   int dist = 0;
   // printGrid( grid );
-  while ( dist != 10 ) {
+  while ( found != 64 ) {
     dist++;
     REPORT( dist );
     int size = hops.size();
@@ -59,7 +58,7 @@ void solve()
       hops.pop();
       for ( int j = 0; j < moves.size(); j++ ) {
         int newPos = oldPos + moves[ j ];
-        if ( newPos < 0 || newPos >= 64 || newPos % 10 == 8 || newPos % 10 == 9 || grid[ newPos ] != -1 ) { continue; }
+        if ( newPos < 0 || newPos >= 80 || newPos % 10 == 8 || newPos % 10 == 9 || grid[ newPos ] != -1 ) { continue; }
         grid[ newPos ] = dist;
         found++;
         hops.push( newPos );
@@ -69,11 +68,30 @@ void solve()
     printGrid( grid );
   }
 
+  // letter = row
+  // number = col
   int size = hops.size();
-  // for ( int i = 0; i < size; i++ ) {
-  //   cout << hops.front() << endl;
-  //   hops.pop();
-  // }
+  vector<string> result;
+  for ( int i = 0; i < size; i++ ) {
+    int hop = hops.front();
+    hops.pop();
+
+    string resulti = "";
+    resulti += ( hop / 10 ) + 'a';
+    resulti += ( hop % 10 ) + '1';
+
+    result.push_back( resulti );
+  }
+
+  cout << dist << " ";
+
+  // Sort by rank
+  sort( result.begin(), result.end() );
+
+  for ( int i = 0; i < result.size(); i++ ) {
+    cout << result[ i ] << " ";
+  }
+  cout << endl;
 }
 
 int main()
