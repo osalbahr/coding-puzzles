@@ -6,17 +6,17 @@
 
 using namespace std;
 
-#define REPORT( X ) cout << #X << " = " << X << endl
+#define REPORT( X ) //cout << #X << " = " << X << endl
 
 void printGrid( vector<int> &grid )
 {
-  for ( int i = 0; i < 8; i++ ) {
-    for ( int j = 0; j < 8; j++ ) {
-      cout << grid[ 10 * i + j ] << " ";
-    }
-    cout << endl;
-  }
-  cout << "---------------" << endl;
+  // for ( int i = 0; i < 8; i++ ) {
+  //   for ( int j = 0; j < 8; j++ ) {
+  //     cout << grid[ 10 * i + j ] << " ";
+  //   }
+  //   cout << endl;
+  // }
+  // cout << "---------------" << endl;
 }
 
 void solve()
@@ -36,8 +36,8 @@ void solve()
     }
   
   // Correct
-  for ( int i = 0; i < moves.size(); i++ )
-    cout << moves[ i ] << endl;
+  // for ( int i = 0; i < moves.size(); i++ )
+  //   cout << moves[ i ] << endl;
 
   vector<int> grid( 80, -1 );
   grid[ pos ] = 0;
@@ -65,13 +65,13 @@ void solve()
       }
     }
 
-    printGrid( grid );
+    // printGrid( grid );
   }
 
   // letter = row
   // number = col
   int size = hops.size();
-  vector<string> result;
+  set<string> result;
   for ( int i = 0; i < size; i++ ) {
     int hop = hops.front();
     hops.pop();
@@ -80,16 +80,22 @@ void solve()
     resulti += ( hop / 10 ) + 'a';
     resulti += ( hop % 10 ) + '1';
 
-    result.push_back( resulti );
+    result.insert( resulti );
   }
 
   cout << dist << " ";
 
   // Sort by rank
-  sort( result.begin(), result.end() );
-
-  for ( int i = 0; i < result.size(); i++ ) {
-    cout << result[ i ] << " ";
+  while ( result.size() != 0 ) {
+    set<string>::iterator it = result.begin();
+    string min = *result.begin();
+    for (; it != result.end(); it++ ) {
+      string cur = *it;
+      if ( cur[ 1 ] > min[ 1 ] || cur[ 0 ] < min[ 0 ] )
+        min = cur;
+    }
+    cout << min << " ";
+    result.erase( min );
   }
   cout << endl;
 }
