@@ -1,0 +1,159 @@
+\documentclass[a4paper]{article}
+    \usepackage{fullpage}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{textcomp}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \textheight=10in
+    \pagestyle{empty}
+    \raggedright
+    \usepackage[left=0.8in,right=0.8in,bottom=0.8in,top=0.8in]{geometry}
+
+    %\renewcommand{\encodingdefault}{cg}
+%\renewcommand{\rmdefault}{lgrcmr}
+
+\def\bull{\vrule height 0.8ex width .7ex depth -.1ex }
+
+% DEFINITIONS FOR RESUME %%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\area} [2] {
+    \vspace*{-9pt}
+    \begin{verse}
+        \textbf{#1}   #2
+    \end{verse}
+}
+
+\newcommand{\lineunder} {
+    \vspace*{-8pt} \\
+    \hspace*{-18pt} \hrulefill \\
+}
+
+\newcommand{\header} [1] {
+    {\hspace*{-18pt}\vspace*{6pt} \textsc{#1}}
+    \vspace*{-6pt} \lineunder
+}
+
+\newcommand{\employer} [3] {
+    { \textbf{#1} (#2)\\ \underline{\textbf{\emph{#3}}}\\  }
+}
+
+\newcommand{\contact} [3] {
+    \vspace*{-10pt}
+    \begin{center}
+        {\Huge \scshape {#1}}\\
+        #2 \\ #3
+    \end{center}
+    \vspace*{-8pt}
+}
+
+\newenvironment{achievements}{
+    \begin{list}
+        {$\bullet$}{\topsep 0pt \itemsep -2pt}}{\vspace*{4pt}
+    \end{list}
+}
+
+\newcommand{\schoolwithcourses} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+    \vspace*{5pt}
+}
+
+\newcommand{\school} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+}
+% END RESUME DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%
+
+    \begin{document}
+\vspace*{-40pt}
+
+    
+
+%==== Profile ====%
+\vspace*{-10pt}
+\begin{center}
+	{\Huge \scshape {Osama Albahrani}}\\
+	1910 Entrepreneur Dr, Raleigh, NC 27606$\cdot$ osalbahr@ncsu.edu $\cdot$ (217) 979-1840 $\cdot$ linkedin.com/in/osama-albahrani/\\
+\end{center}
+
+%==== Education ====%
+\header{Education}
+\textbf{North Carolina State University}\hfill Raleigh, NC\\
+BS Computer Science - Minor in Cognitive Science \textit{GPA: 3.714 - Major GPA: 4.000} \hfill May 2024\\
+\vspace{2mm}
+
+%==== Skills ====%
+\header{Skills}
+\begin{tabular}{ l l }
+	Programming Languages:                      & C, C++, Java, Python, Assembly                                  \\
+	Development Tools:                      & Git, GitHub, Visual Studio Code, Eclipse, gcc, gdb, Jenkins                                   \\
+	Operating Systems: & MacOS, Linux                   \\
+	Human Languages:                                  & Arabic - Native Speaker, English - Proficient \\
+\end{tabular}
+\vspace{2mm}
+
+%==== Recent School Projects ====%
+\header{Recent School Projects}
+\vspace{1mm}
+
+\textbf{Maxsum} \hfill \\
+\textit{Course: CSC 246 - Concepts and Facilities of Operating Systems for Computer Scientists} \hfill Fall 2022\\
+\vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+	\item Computed the maximum sum in a subarray of length $\ge$ 1 in an arbitrary length, user-provided array
+	\item Compared the time of execution based on the number of processes on arrays of length more than 100,000
+	\item Utilized the power of multi-core Central Processing Units (CPUs), bringing down the execution time for an array with 100k elements from 12 seconds to 3 seconds on a dual-core Intel processor
+    \item Used a POSIX anonymous pipe as a means for interprocess communication between the parent process and the child processes to fetch and compare results\end{itemize}
+\textbf{Wordle} \hfill \\
+\textit{Course: CSC 230 - C and Software Tools} \hfill Spring 2022\\
+\vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+	\item Implemented the famous word-guessing game, Wordle, in the C programming language. The user runs the program in a command-line interface (CLI) and provides a file to be used as the word bank
+	\item Used merge sort to sort the words in the word bank to enable using binary search, bringing down the time complexity of checking the validity of a guess (i.e. if it exists in the word bank) down to $O(\log{}n)$
+\end{itemize}
+
+
+%==== Experience ====%
+\header{Work Experience}
+\vspace{1mm}
+
+\textbf{Academic Support Program for Student-Athletes at NC State} \hfill Raleigh, NC\\
+\textit{Science Lab Tutor and 1-on-1 Sessions in Physics, Chemistry, and Math} \hfill Aug 2022 - Present\\
+\vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+	\item Assisted student athletes in weekly 1-on-1 and drop-in tutoring sessions to develop problem solving skills and a deeper understanding of the subjects in accordance to their Athletic Academic Advisor
+	\item Reported session details to ensure conformity to both NCAA and University guidelines
+\end{itemize}
+\textbf{New Student Programs at NC State} \hfill Raleigh, NC\\
+\textit{Summer Start Mentor} \hfill Jun 2022 - Aug 2022\\
+\vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+	\item Met weekly with 14 first-year students to ensure a smooth transition to NC State, both academically and socially, and provided resources as necessary
+	\item Hosted events to provide a sense of community to +200 Summer Start Participants
+\end{itemize}
+\textbf{University Housing at NC State} \hfill Raleigh, NC\\
+\textit{Community Assistant} \hfill Jan 2022 - May 2022\\
+\vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+	\item Served as a Community Assistant at a help desk serving three on-campus residence halls
+	\item Completed administrative tasks such as answering phone calls, sending emails, processing and organizing envelopes and packages, and shredding
+	\item Documented all key distribution, collection, and lock recore changes to maintain campus security
+\end{itemize}
+\textbf{Computer Science Department at NC State} \hfill Raleigh, NC\\
+\textit{Teaching Assistant - CSC 116 Introduction to Computing - Java} \hfill Aug 2021 - Dec 2021\\
+\vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+	\item Helped the instructor facilitate lectures and resolved technical issues
+	\item Graded around 15 programming assignments for 20 students
+	\item Hosted weekly office hours to support students\textquotesingle{} success
+	\item Answered students\textquotesingle{} questions on Piazza (message board)
+\end{itemize}
+
+
+
+
+
+
+\ 
+\end{document}
