@@ -1,3 +1,5 @@
+#define DEBUG
+
 #include <iostream>
 #include <vector>
 #include <set>
@@ -9,10 +11,14 @@
 using namespace std;
 
 #define REPORT( X ) cout << #X << " = " << X << endl;
+#define REPORTP( P ) printf( "%s = %d (%d,%d)\n", #P, grid[ P.row ][ P.col ], P.row + 1, P.col + 1 )
 
 typedef pair<int,int> pi;
+#define row first
+#define col second
 
 int rows, cols;
+pi endPoint;
 vector<pi> moves;
 
 pi operator+( const pi& a, const pi& b )
@@ -30,41 +36,127 @@ static bool legal( pi p )
   return true;
 }
 
+typedef struct {
+  int heightDiff;
+  pi src;
+  pi point;
+} MoveInfo;
+
+bool operator>( const MoveInfo& lhs, const MoveInfo& rhs )
+{
+  return lhs.heightDiff > rhs.heightDiff;
+}
+
 vector<vector<int>> grid;
 set<pi> visited;
 
-typedef struct {
-  int heightDiff;
-  int idx;
-} MoveInfo;
+priority_queue<MoveInfo, vector<MoveInfo>, greater<MoveInfo>> toVisit;
 
-bool my_less_than( const MoveInfo& a, const MoveInfo& b ) {
-  return a.heightDiff < b.heightDiff;
+static void printQ()
+{
+  auto cpy = toVisit;
+  while ( !cpy.empty() ) {
+    auto& cur = cpy.top();
+    auto& src = cur.src;
+    auto& point = cur.point;
+    printf( "Q: %d (%d,%d)[%d] -> (%d,%d)[%d]\n", cur.heightDiff,
+            src.row + 1, src.col + 1, grid[ src.row ][ src.col ],
+            point.row + 1, point.col + 1, grid[ point.row ][ point.col ] );
+    cpy.pop();
+  }
 }
 
-static bool getMin( pi start, int ladder )
+// Debugging 3.in
+static void printGrid()
 {
-  int height = grid[ start.first ][ start.second ];
-  vector<pi> candidates;
-  vector<MoveInfo> infos;
-  for ( pi move : moves ) {
-    pi current = start + move;
-    int idx = 0;
-    if ( legal( current ) && visited.insert( current ).second ) {
-      int newHeight = grid[ current.first ][ current.second ];
-      MoveInfo info = { newHeight - height, idx++ };
-      candidates.push_back( current );
-      infos.push_back( info );
+  for ( int r = 0; r < rows; r++ ) {
+    for ( int c = 0; c < cols; c++ ) {
+      pi p = { r, c };
+      if ( visited.count( p ) > 0 )
+        printf( "X%2dX ", grid[ r ][ c ] );
+      else
+        printf( "(%2d) ", grid[ r ][ c ] );
     }
+    cout << endl;
   }
 
-  sort( infos.begin(), infos.end(), my_less_than );
+  printQ();
 
-  return false;
+  cout << endl;
+}
+
+static int getMin( pi& start )
+{
+  printGrid();
+
+  // Can be elimated using recursion
+  int minLadder = 0;
+  int height = grid[ start.row ][ start.col ];
+  visited.insert( start );
+  for ( pi move : moves ) {
+    pi newPoint = start + move;
+    if ( legal( newPoint ) && visited.count( newPoint ) == 0 ) {
+      // How much to climb
+      int heightDiff = grid[ newPoint.row ][ newPoint.col ] - height;
+      toVisit.push( { heightDiff, start, newPoint } );
+    }
+  }
+  printGrid();
+
+  while ( !toVisit.empty() ) {
+    const MoveInfo current = toVisit.top();
+    toVisit.pop();
+    start = current.point;
+    // Already visited (could use a map)
+    if ( visited.count( start ) > 0 ) {
+      continue;
+    }
+
+    REPORTP( start );
+  
+    minLadder = max( minLadder, current.heightDiff );
+    auto src = current.src;
+    printf( "%d (%d,%d) -> (%d,%d)\n", minLadder,
+            src.row + 1, src.col + 1, start.row + 1, start.col + 1 );
+    // Found
+    if ( start == endPoint )
+      return minLadder;
+
+    // REPORTP( start );
+    // REPORT( current.heightDiff );
+
+    visited.insert( start );
+    height = grid[ start.row ][ start.col ];
+    for ( pi move : moves ) {
+      pi newPoint = start + move;
+      if ( legal( newPoint ) && visited.count( newPoint ) == 0 ) {
+        REPORTP( newPoint );
+        // How much to climb
+        int heightDiff = grid[ newPoint.row ][ newPoint.col ] - height;
+        REPORT( heightDiff );
+        toVisit.push( { heightDiff, start, newPoint } );
+        printQ();
+        cout << endl;
+      }
+    }
+    printGrid();
+  }
+
+  return minLadder;
 }
 
 int main()
 {
+  // MoveInfo in1 = { 2, { 4, 5 } };
+  // MoveInfo in2 = { 20, { 40, 50 } };
+  // toVisit.push( in1 );
+  // toVisit.push( in2 );
+  // while ( !toVisit.empty() ) {
+  //   REPORT( toVisit.top().heightDiff );
+  //   toVisit.pop();
+  // }
+  // exit( 1 );
+
   cin >> rows >> cols;
   grid.resize( rows );
   for ( auto& row : grid )
@@ -82,5 +174,7 @@ int main()
       else
         moves.push_back( { diff, diff2 } );
   
-  cout << getMin( { 0, 0 }, 0 ) << endl;
+  endPoint = { rows - 1, cols - 1 };
+  pi start = { 0, 0 };
+  cout << getMin( start ) << endl;
 }
