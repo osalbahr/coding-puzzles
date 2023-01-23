@@ -24,7 +24,7 @@ typedef pair<int,int> pi;
 
 int rows, cols;
 pi endPoint;
-vector<pi> moves;
+vector<pi> moves = { {-1, 0}, {0, -1}, {0, 1}, {1, 0 } };
 
 pi operator+( const pi& a, const pi& b )
 {
@@ -113,19 +113,10 @@ static int getMin( pi& start )
     if ( visited.count( start ) > 0 ) {
       continue;
     }
-
-    REPORTP( start );
   
     minLadder = max( minLadder, current.heightDiff );
-    // auto src = current.src;
-    // printf( "%d (%d,%d) -> (%d,%d)\n", minLadder,
-    //         src.row + 1, src.col + 1, start.row + 1, start.col + 1 );
-    // Found
     if ( start == endPoint )
       return minLadder;
-
-    // REPORTP( start );
-    // REPORT( current.heightDiff );
 
     visited.insert( start );
     height = grid[ start.row ][ start.col ];
@@ -137,7 +128,6 @@ static int getMin( pi& start )
         int heightDiff = grid[ newPoint.row ][ newPoint.col ] - height;
         REPORT( heightDiff );
         toVisit.push( { heightDiff, start, newPoint } );
-        // cout << endl;
       }
     }
   }
@@ -147,16 +137,6 @@ static int getMin( pi& start )
 
 int main()
 {
-  // MoveInfo in1 = { 2, { 4, 5 } };
-  // MoveInfo in2 = { 20, { 40, 50 } };
-  // toVisit.push( in1 );
-  // toVisit.push( in2 );
-  // while ( !toVisit.empty() ) {
-  //   REPORT( toVisit.top().heightDiff );
-  //   toVisit.pop();
-  // }
-  // exit( 1 );
-
   cin >> rows >> cols;
   grid.resize( rows );
   for ( auto& row : grid )
@@ -165,15 +145,7 @@ int main()
   for ( int i = 0; i < rows; i++ )
     for ( int j = 0; j < cols; j++ )
       cin >> grid[ i ][ j ];
-  
-  vector<int> diffs = { 0, 1, -1 };
-  for ( int diff : diffs )
-    for ( int diff2 : diffs )
-      if ( diff != 0 && diff2 != 0 )
-        continue;
-      else
-        moves.push_back( { diff, diff2 } );
-  
+    
   endPoint = { rows - 1, cols - 1 };
   pi start = { 0, 0 };
   cout << getMin( start ) << endl;
