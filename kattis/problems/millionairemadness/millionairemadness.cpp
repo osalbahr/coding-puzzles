@@ -1,4 +1,4 @@
-#define DEBUG
+// #define DEBUG
 
 #include <iostream>
 #include <vector>
@@ -10,8 +10,13 @@
 
 using namespace std;
 
+#ifdef DEBUG
 #define REPORT( X ) cout << #X << " = " << X << endl;
 #define REPORTP( P ) printf( "%s = %d (%d,%d)\n", #P, grid[ P.row ][ P.col ], P.row + 1, P.col + 1 )
+#else
+#define REPORT( X )
+#define REPORTP( P )
+#endif
 
 typedef pair<int,int> pi;
 #define row first
@@ -52,6 +57,8 @@ set<pi> visited;
 
 priority_queue<MoveInfo, vector<MoveInfo>, greater<MoveInfo>> toVisit;
 
+// Debugging 3.in
+#ifdef DEBUG
 static void printQ()
 {
   auto cpy = toVisit;
@@ -66,7 +73,6 @@ static void printQ()
   }
 }
 
-// Debugging 3.in
 static void printGrid()
 {
   for ( int r = 0; r < rows; r++ ) {
@@ -84,6 +90,10 @@ static void printGrid()
 
   cout << endl;
 }
+#else
+static void printQ() { return; };
+static void printGrid() { return; };
+#endif
 
 static int getMin( pi& start )
 {
@@ -115,9 +125,9 @@ static int getMin( pi& start )
     REPORTP( start );
   
     minLadder = max( minLadder, current.heightDiff );
-    auto src = current.src;
-    printf( "%d (%d,%d) -> (%d,%d)\n", minLadder,
-            src.row + 1, src.col + 1, start.row + 1, start.col + 1 );
+    // auto src = current.src;
+    // printf( "%d (%d,%d) -> (%d,%d)\n", minLadder,
+    //         src.row + 1, src.col + 1, start.row + 1, start.col + 1 );
     // Found
     if ( start == endPoint )
       return minLadder;
@@ -136,7 +146,7 @@ static int getMin( pi& start )
         REPORT( heightDiff );
         toVisit.push( { heightDiff, start, newPoint } );
         printQ();
-        cout << endl;
+        // cout << endl;
       }
     }
     printGrid();
