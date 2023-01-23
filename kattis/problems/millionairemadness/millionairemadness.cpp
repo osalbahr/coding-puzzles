@@ -86,19 +86,12 @@ static void printGrid()
     cout << endl;
   }
 
-  printQ();
-
   cout << endl;
 }
-#else
-static void printQ() { return; };
-static void printGrid() { return; };
 #endif
 
 static int getMin( pi& start )
 {
-  printGrid();
-
   // Can be elimated using recursion
   int minLadder = 0;
   int height = grid[ start.row ][ start.col ];
@@ -111,7 +104,6 @@ static int getMin( pi& start )
       toVisit.push( { heightDiff, start, newPoint } );
     }
   }
-  printGrid();
 
   while ( !toVisit.empty() ) {
     const MoveInfo current = toVisit.top();
@@ -145,11 +137,9 @@ static int getMin( pi& start )
         int heightDiff = grid[ newPoint.row ][ newPoint.col ] - height;
         REPORT( heightDiff );
         toVisit.push( { heightDiff, start, newPoint } );
-        printQ();
         // cout << endl;
       }
     }
-    printGrid();
   }
 
   return minLadder;
