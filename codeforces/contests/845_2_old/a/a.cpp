@@ -66,15 +66,13 @@ static void solve()
 {
   int n;
   cin >> n;
-  int n1, n2;
-  cin >> n1;
-  // n1 %= 2;
+  int a[n];
+  forn(n) {
+    cin >> a[i_];
+  }
   int count = 0;
-  while( --n ) {
-    cin >> n2;
-    // n2 %= 2;
-    count += (n1 %2) == (n2 % 2);
-    n1 = n2;
+  forn(n-1) {
+    count += (a[i_] % 2) == (a[i_+1] % 2);
   }
 
   // int count = 0;
