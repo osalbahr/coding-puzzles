@@ -53,27 +53,32 @@ pi operator*(const int a, const pi& p) {
 
 // Add program state (global variables) here
 
-
-
 static void solve()
 {
   int n;
   cin >> n;
-  vector<int> v(n);
-  forn(n)
-    cin >> v[i_];
-  sort(v.begin(), v.end());
-  reverse(v.begin(), v.end());
+  priority_queue<int> q;
+  forn(n) {
+    int num;
+    cin >> num;
+    q.push(num);
+  }
 
   int count = 0;
-  while (v[0] != 0) {
+  while ( !q.empty() && q.top() != 0 ) {
     count++;
-    if ( v[0] >= 2)
-      v[0] = 0;
-    else
-      v[0]--, v[1]--;
-    sort(v.begin(), v.end());
-    reverse(v.begin(), v.end());
+    if ( q.top() >= 2) {
+      q.pop();
+    } else {
+      int j = q.top();
+      q.pop();
+      if ( !q.empty() ) {
+        int j = q.top();
+        q.pop();
+        q.push(j-1);
+      }
+      q.push(j-1);
+    }
   }
   cout << count << endl;
 }
