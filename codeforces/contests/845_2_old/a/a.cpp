@@ -54,7 +54,13 @@ pi operator*(const int a, const pi& p) {
 
 // Add program state (global variables) here
 
-
+// https://codeforces.com/contest/1777/submission/190315240
+void fast()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+}
 
 static void solve()
 {
@@ -62,12 +68,12 @@ static void solve()
   cin >> n;
   int n1, n2;
   cin >> n1;
-  n1 %= 2;
+  // n1 %= 2;
   int count = 0;
-  forn( n - 1 ) {
+  while( --n ) {
     cin >> n2;
-    n2 %= 2;
-    count += n1 == n2;
+    // n2 %= 2;
+    count += (n1 %2) == (n2 % 2);
     n1 = n2;
   }
 
@@ -80,9 +86,11 @@ static void solve()
 
 int main()
 {
+  fast();
+
   int t;
   cin >> t;
-  forn(t) {
+  while(t--) {
     solve();
   }
 }
