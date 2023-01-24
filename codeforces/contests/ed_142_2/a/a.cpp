@@ -59,12 +59,9 @@ static void solve()
 {
   int n;
   cin >> n;
-  priority_queue<int> q;
-  forn(n) {
-    int num;
-    cin >> num;
-    q.push( -1 * num );
-  }
+  vector<int> v(n);
+  forn(n)
+    cin >> v[i_];
   sort(v.begin(), v.end());
   reverse(v.begin(), v.end());
 
