@@ -53,18 +53,69 @@ pi operator*(const int a, const pi& p) {
 
 // Add program state (global variables) here
 
+static pi minMax( vector<int> &v )
+{
+  pi idx;
+  int minN = INT_MAX, maxN = INT_MIN;
+  forn((int)v.size()) {
+    int num = v[ i_ ];
+    if ( num != i_ + 1 ) {
+      if ( minN != min(minN, v[i_] ) ) {
+        minN = min(minN, v[i_] );
+        idx.first = i_;
+      }
+      if ( maxN != max(maxN, v[i_] ) ) {
+        maxN = max(minN, v[i_] );
+        idx.second = i_;
+      }
+    }
+  }
 
+  // REPORT( minN );
+  // REPORT( idx.first );
+  // REPORT( maxN );
+  // REPORT( idx.second );
+
+  if (minN != INT_MAX) {
+    int temp = v[idx.first];
+    v[idx.first] = v[idx.second];
+    v[idx.second] = temp;
+  }
+
+  cout << minN << endl;
+  cout << maxN << endl;
+
+  return {minN, maxN};
+}
+
+static void printV(vector<int> v)
+{
+  for ( size_t idx = 0; idx < v.size(); idx++ ) {
+    cout << v[idx] << ",";
+  }
+  cout << endl;
+}
 
 static void solve()
 {
+  int n;
+  cin >> n;
+  vector<int> v(n);
+  forn(n)
+    cin >> v[i_];
 
+  int count = 0;
+  while ( minMax(v).first != INT_MAX ) {
+    printV(v);
+    count++;
+  }
+  cout << count << endl;
 }
 
 int main()
 {
-  string line;
-  while ( getline( cin, line ) ) {
-    cout << line << endl;
-  }
-  solve();
+  int t;
+  cin >> t;
+  while (t--)
+    solve();
 }
