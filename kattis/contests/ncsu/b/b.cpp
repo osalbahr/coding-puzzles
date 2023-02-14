@@ -81,12 +81,12 @@ int main()
   }
 
   int maxSoFar = 0;
-  set<pi> visitedEdge;
   for (int i = 1; i <= n; i++) {
-    int n = *canGo[i].begin();
+    map<pi,int> visitedEdgeCount;
+    // int n = *canGo[i].begin();
     // Oops
-    if (visitedEdge.count({i,n}) > 0)
-      continue;
+    // if (visitedEdge.count({i,n}) > 0)
+    //   continue;
     
     queue<pi> toVisit;
     for (int n : canGo[i])
@@ -94,16 +94,18 @@ int main()
 
     int total = 0;
     while (!toVisit.empty()) {
-      auto& [u, v] = toVisit.front();
+      pi& oldP = toVisit.front();
 
-      visitedEdge.insert({u, v});
-      visitedEdge.insert({v, u});
+      total += visitedEdgeCount[oldP] == 0 ? costs[oldP] : 0;
 
-      total += costs[{u, v}];
+      visitedEdgeCount[oldP]++;
+      visitedEdgeCount[{oldP.second, oldP.first}]++;
 
+
+      int v = oldP.second;
       for (int n : canGo[v]) {
         pi p = {v, n};
-        if (visitedEdge.count(p) == 0)
+        if (visitedEdgeCount[p] <= k)
           toVisit.push(p);
       }
 
