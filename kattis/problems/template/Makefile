@@ -1,11 +1,8 @@
-CC = g++
-CFLAGS = -Wall -g -O2 -std=gnu++20
+# https://open.kattis.com/languages/cpp
+CXXFLAGS = -Wall -g -Og -std=gnu++17
 LDLIBS = -lm
 
-hello: hello.o
-hello.o: hello.cpp
+hello: hello.cpp
 
 clean:
-	rm -f hello
-
-	rm -f *.o
+	$(RM) hello
